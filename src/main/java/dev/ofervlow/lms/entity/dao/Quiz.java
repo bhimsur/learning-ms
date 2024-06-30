@@ -11,7 +11,10 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table
+@Table(indexes = {
+		@Index(name = "idx_quiz_code_unq", columnList = "code", unique = true),
+		@Index(name = "idx_quiz_code_classes_id", columnList = "code, classes_id")
+})
 @Getter
 @Setter
 @AllArgsConstructor
@@ -22,6 +25,9 @@ public class Quiz extends Audit {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false)
 	private Long id;
+
+	@Column(nullable = false, unique = true)
+	private String code;
 
 	@Column(nullable = false)
 	private String name;

@@ -32,4 +32,9 @@ public class StudentQuizAnswer extends Audit {
 	@JoinColumn(name = "quiz_question_id")
 	private QuizQuestion quizQuestion;
 
+	@ToString.Exclude
+	@ManyToOne
+	@JoinColumn(name = "student_id")
+	private Student student;
+
 }

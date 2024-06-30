@@ -11,7 +11,9 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table
+@Table(indexes = {
+		@Index(name = "idx_quizquestion_questiontype", columnList = "questionType, quiz_id")
+})
 @Getter
 @Setter
 @AllArgsConstructor
@@ -42,6 +44,10 @@ public class QuizQuestion extends Audit {
 	@ManyToOne
 	@JoinColumn(name = "quiz_id")
 	private Quiz quiz;
+
+	@OneToMany(mappedBy = "quizQuestion")
+	@ToString.Exclude
+	private Set<QuizAnswer> quizAnswers = new LinkedHashSet<>();
 
 	@Override
 	public final boolean equals(Object o) {

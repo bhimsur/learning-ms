@@ -10,7 +10,9 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table
+@Table(indexes = {
+		@Index(name = "idx_student_idnumber_unq", columnList = "idNumber", unique = true)
+})
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,6 +23,9 @@ public class Student extends Audit {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false)
 	private Long id;
+
+	@Column(nullable = false, unique = true)
+	private String idNumber;
 
 	@Column(nullable = false)
 	private String name;
@@ -46,5 +51,9 @@ public class Student extends Audit {
 	@ToString.Exclude
 	@OneToMany(mappedBy = "student")
 	private Set<Enrollment> enrollments = new LinkedHashSet<>();
+
+	@OneToMany(mappedBy = "student")
+	@ToString.Exclude
+	private Set<StudentQuizAnswer> studentQuizAnswers = new LinkedHashSet<>();
 
 }

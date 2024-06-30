@@ -9,7 +9,9 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table
+@Table(indexes = {
+		@Index(name = "idx_enrollment_student_id", columnList = "student_id, courseCycle_course_id, courseCycle_cycle_id")
+})
 @Getter
 @Setter
 @AllArgsConstructor

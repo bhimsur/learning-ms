@@ -8,7 +8,9 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table
+@Table(indexes = {
+		@Index(name = "idx_category_code_unq", columnList = "code", unique = true)
+})
 @Getter
 @Setter
 @AllArgsConstructor

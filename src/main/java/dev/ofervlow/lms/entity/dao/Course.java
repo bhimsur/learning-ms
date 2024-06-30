@@ -8,7 +8,9 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table
+@Table(indexes = {
+		@Index(name = "idx_course_code_unq", columnList = "code, category_id", unique = true)
+})
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,6 +21,9 @@ public class Course extends Audit {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false)
 	private Long id;
+
+	@Column(nullable = false, unique = true)
+	private String code;
 
 	@Column(nullable = false)
 	private String title;

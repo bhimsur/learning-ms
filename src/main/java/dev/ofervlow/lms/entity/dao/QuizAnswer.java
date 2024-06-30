@@ -29,4 +29,9 @@ public class QuizAnswer extends Audit {
 	@ToString.Exclude
 	private Set<StudentQuizAnswer> studentQuizAnswers = new LinkedHashSet<>();
 
+	@ToString.Exclude
+	@ManyToOne
+	@JoinColumn(name = "quiz_question_id")
+	private QuizQuestion quizQuestion;
+
 }

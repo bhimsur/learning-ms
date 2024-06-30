@@ -8,7 +8,9 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import java.time.LocalDateTime;
 
 @Entity
-@Table
+@Table(indexes = {
+		@Index(name = "idx_attendance_classes_id", columnList = "classes_id, student_id")
+})
 @Getter
 @Setter
 @AllArgsConstructor

@@ -8,7 +8,9 @@ import org.hibernate.proxy.HibernateProxy;
 import java.util.Objects;
 
 @Entity
-@Table
+@Table(indexes = {
+		@Index(name = "idx_studentquizresult", columnList = "student_id, quiz_id")
+})
 @Getter
 @Setter
 @AllArgsConstructor
