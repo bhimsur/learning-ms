@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -93,6 +95,10 @@ public class SpecificationBuilder<T> implements Specification<T> {
 				expression = root.get(this.key);
 			}
 			return builder.isNull(expression);
+		} else if (operation.equalsIgnoreCase(">=")) {
+			return builder.greaterThanOrEqualTo(root.get(this.key), LocalDateTime.parse(this.value.toString()));
+		} else if (operation.equalsIgnoreCase("<=")) {
+			return builder.lessThanOrEqualTo(root.get(this.key), LocalDateTime.parse(this.value.toString()));
 		}
 		return null;
 	}
