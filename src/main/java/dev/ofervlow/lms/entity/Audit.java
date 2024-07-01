@@ -1,7 +1,6 @@
 package dev.ofervlow.lms.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
@@ -30,4 +29,23 @@ public abstract class Audit implements Serializable {
 
 	@Column(nullable = false)
 	private boolean isDeleted = false;
+
+	@PrePersist
+	public void prePersist() {
+		this.createdAt = LocalDateTime.now();
+		this.createdBy = "admin";
+	}
+
+	@PreUpdate
+	public void preUpdate() {
+		this.updatedAt = LocalDateTime.now();
+		this.updatedBy = "admin";
+	}
+
+	@PreRemove
+	public void preRemove() {
+		this.deletedAt = LocalDateTime.now();
+		this.deletedBy = "admin";
+		this.isDeleted = true;
+	}
 }
