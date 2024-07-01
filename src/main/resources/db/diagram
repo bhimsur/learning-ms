@@ -1,0 +1,127 @@
+Table course {
+  id integer [primary key]
+  title varchar
+  description varchar
+  bibliography longtext
+  categoryId integer
+}
+
+Table category {
+  id integer [primary key]
+  name varchar
+  description varchar
+}
+
+Table cycle {
+  id integer [primary key]
+  description varchar
+  startDate timestamp
+  endDate timestamp
+}
+
+Table courseCycle {
+  courseId integer
+  cycleId integer
+  startDate timestamp
+  endDate timestamp
+}
+
+Table teacher {
+  id integer [primary key]
+  name varchar
+  email varchar
+  hp varchar
+  institutionId integer
+}
+
+Table institution {
+  id integer [primary key]
+  name varchar
+}
+
+Table classesTeacher {
+  classesId integer
+  teacherId integer
+}
+
+Table enrollment {
+  id integer [primary key]
+  studentId integer
+  cycleId integer
+}
+
+Table answer {
+  id integer [primary key]
+}
+
+Table quiz {
+  id integer [primary key]
+  minimumScore double
+  maximumAttemt integer
+  courseCycleId integer
+  classId integer
+}
+
+Table question {
+  id integer [primary key]
+  quizId integer
+  correctAnswerId integer
+}
+
+Table student {
+  id integer [primary key]
+  name varchar
+}
+
+Table attendance {
+  id integer [primary key]
+  studentId integer
+  classId integer
+}
+
+Table classes {
+  id integer [primary key]
+  cycleId integer
+}
+
+Table studentQuiz {
+  id integer [primary key]
+  quizId integer
+  studentId integer
+  score double
+}
+
+Table studentQuizAnswer {
+  id integer [primary key]
+  questionId integer
+  answerId integer
+}
+
+
+Ref: category.id < course.categoryId
+
+Ref: cycle.id < courseCycle.cycleId
+
+Ref: course.id < courseCycle.courseId
+
+Ref: institution.id < teacher.institutionId
+
+Ref: courseCycle.cycleId < enrollment.cycleId
+Ref: courseCycle.cycleId < classes.cycleId
+Ref: enrollment.studentId > student.id
+
+Ref: teacher.id < classesTeacher.teacherId
+Ref: classes.id < classesTeacher.classesId
+
+Ref: quiz.id < question.quizId
+Ref: quiz.id < studentQuiz.quizId
+Ref: quiz.classId > classes.id
+
+Ref: question.correctAnswerId - answer.id
+
+Ref: student.id < studentQuiz.studentId
+Ref: student.id < attendance.studentId
+Ref: studentQuizAnswer.answerId > answer.id
+Ref: studentQuizAnswer.questionId > question.id
+
+Ref: attendance.classId > classes.id
