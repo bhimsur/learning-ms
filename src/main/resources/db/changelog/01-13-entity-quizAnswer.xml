@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd">
+
+    <changeSet id="1719846711334-1" author="bhimsur">
+        <createTable tableName="quiz_answer">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_quizanswer"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="deleted_at" type="DATETIME"/>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="VARCHAR(255)"/>
+            <column name="deleted_by" type="VARCHAR(255)"/>
+            <column name="is_deleted" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="quiz_question_id" type="BIGINT"/>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="quiz_question_id" baseTableName="quiz_answer"
+                                 constraintName="FK_QUIZANSWER_ON_QUIZ_QUESTION" referencedColumnNames="id"
+                                 referencedTableName="quiz_question"/>
+
+        <addForeignKeyConstraint baseColumnNames="correct_answer_id" baseTableName="quiz_question"
+                                 constraintName="FK_QUIZQUESTION_ON_CORRECT_ANSWER" referencedColumnNames="id"
+                                 referencedTableName="quiz_answer"/>
+    </changeSet>
+</databaseChangeLog>

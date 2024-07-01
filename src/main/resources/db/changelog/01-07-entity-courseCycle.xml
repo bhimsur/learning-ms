@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd">
+
+    <changeSet id="1719845377598-1" author="bhimsur">
+        <createTable tableName="course_cycle">
+            <column name="course_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_coursecycle"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="deleted_at" type="DATETIME"/>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="VARCHAR(255)"/>
+            <column name="deleted_by" type="VARCHAR(255)"/>
+            <column name="is_deleted" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cycle_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_coursecycle"/>
+            </column>
+            <column name="start_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="course_cycle"
+                                 constraintName="FK_COURSECYCLE_ON_COURSE" referencedColumnNames="id"
+                                 referencedTableName="course"/>
+        <addForeignKeyConstraint baseColumnNames="cycle_id" baseTableName="course_cycle"
+                                 constraintName="FK_COURSECYCLE_ON_CYCLE" referencedColumnNames="id"
+                                 referencedTableName="cycle"/>
+    </changeSet>
+</databaseChangeLog>

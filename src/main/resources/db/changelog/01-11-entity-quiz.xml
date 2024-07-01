@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd">
+
+
+    <changeSet id="1719846631074-1" author="bhimsur">
+        <createTable tableName="quiz">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_quiz"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="deleted_at" type="DATETIME"/>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="VARCHAR(255)"/>
+            <column name="deleted_by" type="VARCHAR(255)"/>
+            <column name="is_deleted" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="start_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="minimum_score" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="maximum_attempt" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="classes_id" type="BIGINT"/>
+        </createTable>
+        <addUniqueConstraint columnNames="code" constraintName="uc_quiz_code" tableName="quiz"/>
+        <createIndex indexName="idx_quiz_code_classes_id" tableName="quiz">
+            <column name="code"/>
+            <column name="classes_id"/>
+        </createIndex>
+        <createIndex indexName="idx_quiz_code_unq" tableName="quiz" unique="true">
+            <column name="code"/>
+        </createIndex>
+        <addForeignKeyConstraint baseColumnNames="classes_id" baseTableName="quiz" constraintName="FK_QUIZ_ON_CLASSES"
+                                 referencedColumnNames="id"
+                                 referencedTableName="classes"/>
+    </changeSet>
+</databaseChangeLog>
