@@ -50,4 +50,16 @@ public class CycleService {
 			throw e;
 		}
 	}
+
+	public CycleDto get(Long id) {
+		log.info("start get, id : {}", id);
+		try {
+			return cycleRepository.findById(id)
+					.map(cycleMapper::toDto)
+					.orElseThrow(() -> new GeneralException("data not found"));
+		} catch (Exception e) {
+			log.error("error get : {}", e.getMessage(), e);
+			throw e;
+		}
+	}
 }
