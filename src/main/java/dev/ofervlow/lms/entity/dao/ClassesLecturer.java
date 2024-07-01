@@ -19,11 +19,11 @@ public class ClassesLecturer implements Serializable {
 
 	@Id
 	@ManyToOne
-	@JoinColumn(name = "lecturer_id", nullable = false)
+	@JoinColumn(name = "lecturer_id", referencedColumnName = "id", nullable = false)
 	private Lecturer lecturer;
 
 	@Id
 	@ManyToOne
-	@JoinColumn(name = "classes_id", nullable = false)
+	@JoinColumn(name = "classes_id", referencedColumnName = "id", nullable = false)
 	private Classes classes;
 }

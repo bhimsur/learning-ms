@@ -44,7 +44,10 @@ public class Classes extends Audit {
 
 	@ToString.Exclude
 	@ManyToOne
-	@JoinColumn
+	@JoinColumns({
+			@JoinColumn(name = "cycle_id"),
+			@JoinColumn(name = "course_id")
+	})
 	private CourseCycle courseCycle;
 
 	@ToString.Exclude

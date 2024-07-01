@@ -10,6 +10,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class ClassesLecturerId implements Serializable {
-	private Long courseCycleId;
-	private Long lecturerId;
+	private Long classes;
+	private Long lecturer;
 }

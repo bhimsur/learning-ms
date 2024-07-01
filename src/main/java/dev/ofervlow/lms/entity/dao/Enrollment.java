@@ -38,7 +38,10 @@ public class Enrollment extends Audit {
 
 	@ToString.Exclude
 	@ManyToOne
-	@JoinColumn
+	@JoinColumns({
+			@JoinColumn(name = "cycle_id"),
+			@JoinColumn(name = "course_id")
+	})
 	private CourseCycle courseCycle;
 
 	@Override
